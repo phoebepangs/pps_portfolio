@@ -1,0 +1,976 @@
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Programming & UI/UX | PP's Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,700;1,9..144,400&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <style>
+      /* ══════════════════════════════════════
+           頁面佈局
+        ══════════════════════════════════════ */
+      .prog-wrap {
+        padding: 0 8% 120px 8%;
+        max-width: 1400px;
+        margin: 0 auto;
+      }
+
+      /* ── 每個項目容器 ── */
+      .proj-entry {
+        display: grid;
+        grid-template-columns: 1fr 1.3fr;
+        gap: 70px;
+        align-items: start;
+        margin-bottom: 120px;
+        padding-bottom: 120px;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+      }
+
+      .proj-entry:last-child {
+        border-bottom: none;
+        margin-bottom: 0;
+        padding-bottom: 0;
+      }
+
+      /* Reverse 版（右文左圖） */
+      .proj-entry.reverse {
+        grid-template-columns: 1.3fr 1fr;
+      }
+
+      .proj-entry.reverse .proj-text {
+        order: 2;
+      }
+
+      .proj-entry.reverse .proj-visual {
+        order: 1;
+      }
+
+      /* ── 文字側 ── */
+      .proj-text {
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+        position: sticky;
+        top: 110px; /* 吸附在導航欄下方 */
+      }
+
+      .proj-num {
+        font-family: "Fraunces", serif;
+        font-style: italic;
+        font-size: 0.95rem;
+        color: #a7d7c5;
+        margin-bottom: 12px;
+        display: block;
+      }
+
+      .proj-title {
+        font-size: clamp(1.6rem, 3vw, 2.4rem);
+        font-weight: 800;
+        color: #1a1a1a;
+        margin: 0 0 6px 0;
+        letter-spacing: -0.03em;
+        line-height: 1.1;
+      }
+
+      .proj-module {
+        font-size: 11px;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: #b2bec3;
+        margin-bottom: 28px;
+        display: block;
+      }
+
+      /* 技術標籤 */
+      .tech-stack {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-bottom: 28px;
+      }
+
+      .tech-tag {
+        padding: 4px 12px;
+        border-radius: 50px;
+        font-size: 10px;
+        font-weight: 600;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        background: rgba(167, 215, 197, 0.12);
+        color: #5aaa8a;
+        border: 1px solid rgba(167, 215, 197, 0.35);
+      }
+
+      .tech-tag.dark {
+        background: #f4f4f4;
+        color: #636e72;
+        border-color: transparent;
+      }
+
+      /* 描述段落 */
+      .proj-desc {
+        font-size: 15px;
+        line-height: 1.8;
+        color: #636e72;
+        margin-bottom: 32px;
+      }
+
+      .proj-desc p {
+        margin: 0 0 16px 0;
+      }
+
+      .proj-desc p:last-child {
+        margin-bottom: 0;
+      }
+
+      .proj-desc strong {
+        color: #2d3436;
+        font-weight: 600;
+      }
+
+      /* 角色標注 */
+      .proj-role {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 6px 14px;
+        background: rgba(167, 215, 197, 0.08);
+        border-radius: 50px;
+        border: 1px solid rgba(167, 215, 197, 0.25);
+        font-size: 11px;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        color: #5aaa8a;
+        margin-bottom: 28px;
+      }
+
+      .proj-role::before {
+        content: "●";
+        font-size: 6px;
+      }
+
+      /* Live Site 按鈕 */
+      .proj-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 12px 28px;
+        background: #1a1a1a;
+        color: #fff;
+        text-decoration: none;
+        border-radius: 50px;
+        font-size: 12px;
+        font-weight: 600;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        transition:
+          background 0.3s,
+          transform 0.3s;
+        width: fit-content;
+      }
+
+      .proj-link:hover {
+        background: #a7d7c5;
+        color: #1a1a1a;
+        transform: translateY(-2px);
+      }
+
+      .proj-link .arrow {
+        font-size: 14px;
+        transition: transform 0.3s;
+      }
+
+      .proj-link:hover .arrow {
+        transform: translateX(3px);
+      }
+
+      /* ── 視覺側（瀏覽器 Mockup） ── */
+      .proj-visual {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+      }
+
+      /* 瀏覽器框架 */
+      .browser-mockup {
+        border-radius: 14px;
+        overflow: hidden;
+        box-shadow:
+          0 20px 60px rgba(0, 0, 0, 0.1),
+          0 4px 16px rgba(0, 0, 0, 0.06);
+        border: 1px solid rgba(0, 0, 0, 0.07);
+        transition:
+          transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+          box-shadow 0.5s ease;
+        cursor: pointer;
+        text-decoration: none;
+        display: block;
+      }
+
+      .browser-mockup:hover {
+        transform: translateY(-6px) scale(1.01);
+        box-shadow:
+          0 32px 80px rgba(0, 0, 0, 0.14),
+          0 8px 24px rgba(167, 215, 197, 0.15);
+      }
+
+      /* 瀏覽器頂部欄 */
+      .brow-bar {
+        background: #f1f1f1;
+        padding: 10px 14px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .brow-dots {
+        display: flex;
+        gap: 5px;
+        flex-shrink: 0;
+      }
+
+      .brow-dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+      }
+
+      .brow-dot.r {
+        background: #ff5f56;
+      }
+      .brow-dot.y {
+        background: #ffbd2e;
+      }
+      .brow-dot.g {
+        background: #27c93f;
+      }
+
+      .brow-url {
+        flex: 1;
+        background: #fff;
+        border-radius: 6px;
+        padding: 4px 12px;
+        font-size: 10px;
+        color: #888;
+        letter-spacing: 0.3px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+      }
+
+      /* 截圖區域 */
+      .brow-screen {
+        width: 100%;
+        aspect-ratio: 16 / 10;
+        overflow: hidden;
+        background: #eef2ef;
+        position: relative;
+      }
+
+      .brow-screen img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: top center;
+        display: block;
+        transition: transform 0.6s ease;
+      }
+
+      .browser-mockup:hover .brow-screen img {
+        transform: scale(1.03) translateY(-2%);
+      }
+
+      /* 截圖 placeholder（還沒放圖時的佔位） */
+      .brow-placeholder {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+        color: #a7d7c5;
+        font-size: 12px;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+      }
+
+      .brow-placeholder::before {
+        content: "⊕";
+        font-size: 32px;
+        opacity: 0.4;
+      }
+
+      /* 多截圖並排 */
+      .multi-screens {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+      }
+
+      .multi-screens .browser-mockup {
+        margin: 0;
+      }
+
+      .multi-screens .brow-screen {
+        aspect-ratio: 4 / 3;
+      }
+
+      /* ── Note/備注 ── */
+      .proj-note {
+        font-size: 11px;
+        color: #b2bec3;
+        letter-spacing: 0.5px;
+        line-height: 1.6;
+        padding: 10px 14px;
+        background: rgba(167, 215, 197, 0.05);
+        border-left: 2px solid rgba(167, 215, 197, 0.4);
+        border-radius: 0 6px 6px 0;
+        margin-top: 16px;
+      }
+
+      /* ══════════════════════════════════════
+           Lightbox
+        ══════════════════════════════════════ */
+      #lightbox {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.97);
+        backdrop-filter: blur(18px);
+        z-index: 9998;
+        justify-content: center;
+        align-items: center;
+      }
+
+      #lightbox img {
+        max-width: 90vw;
+        max-height: 90vh;
+        border-radius: 8px;
+        object-fit: contain;
+      }
+
+      .lb-close {
+        position: absolute;
+        top: 28px;
+        right: 36px;
+        font-size: 38px;
+        color: rgba(255, 255, 255, 0.5);
+        cursor: pointer;
+        line-height: 1;
+        transition: color 0.2s;
+      }
+
+      .lb-close:hover {
+        color: #a7d7c5;
+      }
+
+      /* ══════════════════════════════════════
+           響應式
+        ══════════════════════════════════════ */
+      @media (max-width: 900px) {
+        .proj-entry,
+        .proj-entry.reverse {
+          grid-template-columns: 1fr;
+          gap: 36px;
+        }
+
+        .proj-entry.reverse .proj-text {
+          order: 1;
+        }
+        .proj-entry.reverse .proj-visual {
+          order: 2;
+        }
+
+        .proj-text {
+          position: static;
+        }
+
+        .multi-screens {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      @media (max-width: 640px) {
+        .prog-wrap {
+          padding: 0 5% 80px 5%;
+        }
+        .proj-entry {
+          margin-bottom: 70px;
+          padding-bottom: 70px;
+          gap: 24px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="cursor-dot"></div>
+    <div class="cursor-outline"></div>
+    <div class="ambient-glow"></div>
+
+    <!-- Lightbox -->
+    <div id="lightbox" onclick="if (event.target === this) closeLightbox();">
+      <span class="lb-close" onclick="closeLightbox()">×</span>
+      <img id="lightbox-img" src="" alt="" />
+    </div>
+
+    <!-- 導航欄 -->
+    <nav class="glass-nav">
+      <a href="index.html" class="logo">PP'S PORTFOLIO</a>
+      <ul class="nav-links">
+        <li><a href="index.html#work">Work</a></li>
+        <li><a href="index.html#about">About</a></li>
+        <li><a href="programming.html#contact">Contact</a></li>
+      </ul>
+    </nav>
+
+    <!-- 頁面標題 -->
+    <header class="detail-header">
+      <a href="index.html" class="back-btn">← Back to Portfolio</a>
+      <h1 class="compact-title">Programming &amp; UI/UX</h1>
+    </header>
+
+    <main class="prog-wrap">
+      <!-- ══════════════════════════════════════════
+             01  Paradaisy
+        ══════════════════════════════════════════ -->
+      <div class="proj-entry" data-reveal>
+        <div class="proj-text">
+          <span class="proj-num">01</span>
+          <h2 class="proj-title">Paradaisy</h2>
+          <span class="proj-module"
+            >Programming &nbsp;·&nbsp; Prototype Secondhand Clothing
+            Website</span
+          >
+
+          <div class="tech-stack">
+            <span class="tech-tag">HTML / CSS</span>
+            <span class="tech-tag">PHP</span>
+            <span class="tech-tag">MySQL</span>
+            <span class="tech-tag">SQL</span>
+            <span class="tech-tag dark">E-Commerce</span>
+            <span class="tech-tag dark">Circular Fashion</span>
+          </div>
+
+          <div class="proj-desc">
+            <p>
+              Paradaisy is a student-initiated circular fashion prototype — a
+              secondhand clothing platform where gently used garments are
+              collected, sorted, photographed, and resold at fair prices.
+              Proceeds are donated to charitable organisations with full
+              transparency through published donation records.
+            </p>
+            <p>
+              Built for the Programming module, this project pushed beyond
+              HTML/CSS into server-side development: PHP handles product listing
+              logic, user sessions, and checkout flows, while MySQL manages the
+              product catalogue, orders, and donation data. The frontend
+              implements a complete e-commerce UX — product pages, shopping
+              cart, and purchase confirmation — all hand-coded from scratch.
+            </p>
+            <p>
+              <strong
+                >All product photographs were used with explicit permission from
+                the store owner. The website is ONLY for student project and
+                will NOT use for any business purpose.
+              </strong>
+              The platform also serves as a small-scale data activism exercise,
+              publishing transparent records of where donated proceeds go.
+            </p>
+          </div>
+
+          <a
+            href="https://bxnt8503.leedsnewmedia.net/Programming%20Practical/paradaisy.html"
+            class="proj-link"
+            target="_blank"
+            rel="noopener"
+          >
+            Live Site <span class="arrow">→</span>
+          </a>
+        </div>
+
+        <div class="proj-visual">
+          <a
+            href="https://bxnt8503.leedsnewmedia.net/Programming%20Practical/paradaisy.html"
+            class="browser-mockup"
+            target="_blank"
+            rel="noopener"
+          >
+            <div class="brow-bar">
+              <div class="brow-dots">
+                <div class="brow-dot r"></div>
+                <div class="brow-dot y"></div>
+                <div class="brow-dot g"></div>
+              </div>
+              <div class="brow-url">
+                Paradaisy.co
+              </div>
+            </div>
+            <div class="brow-screen">
+              <img src="assets/paradaisy-home.png" alt="Paradaisy Homepage" />
+              <!-- 沒截圖時顯示 placeholder
+                        <div class="brow-placeholder">Add Screenshot</div>
+                        -->
+            </div>
+          </a>
+
+          <div class="multi-screens">
+            <a
+              href="https://bxnt8503.leedsnewmedia.net/Programming%20Practical/shop.php"
+              class="browser-mockup"
+              target="_blank"
+              rel="noopener"
+            >
+              <div class="brow-bar">
+                <div class="brow-dots">
+                  <div class="brow-dot r"></div>
+                  <div class="brow-dot y"></div>
+                  <div class="brow-dot g"></div>
+                </div>
+                <div class="brow-url">Shop</div>
+              </div>
+              <div class="brow-screen">
+                <img src="assets/paradaisy-shop.png" alt="Paradaisy Shop" />
+              </div>
+            </a>
+
+            <a
+              href="https://bxnt8503.leedsnewmedia.net/Programming%20Practical/cart.php"
+              class="browser-mockup"
+              target="_blank"
+              rel="noopener"
+            >
+              <div class="brow-bar">
+                <div class="brow-dots">
+                  <div class="brow-dot r"></div>
+                  <div class="brow-dot y"></div>
+                  <div class="brow-dot g"></div>
+                </div>
+                <div class="brow-url">Cart / Checkout</div>
+              </div>
+              <div class="brow-screen">
+                <img src="assets/paradaisy-cart.png" alt="Paradaisy Cart" />
+              </div>
+            </a>
+          </div>
+
+          <p class="proj-note">
+            All clothing photographs used on this platform were obtained with
+            explicit permission from the original store owner. © thedays.hk
+          </p>
+        </div>
+      </div>
+
+      <!-- ══════════════════════════════════════════
+             02  Duolingo Impact Website
+        ══════════════════════════════════════════ -->
+      <div class="proj-entry reverse" data-reveal data-reveal-delay="0.05">
+        <div class="proj-text">
+          <span class="proj-num">02</span>
+          <h2 class="proj-title">Duolingo Impact</h2>
+          <span class="proj-module"
+            >D&amp;AD New Blood Awards 2026 &nbsp;·&nbsp; Team Project</span
+          >
+
+          <span class="proj-role">Role: Web Developer</span>
+
+          <div class="tech-stack">
+            <span class="tech-tag">HTML5</span>
+            <span class="tech-tag">CSS</span>
+            <span class="tech-tag">JavaScript</span>
+            <span class="tech-tag dark">Interactive Design</span>
+            <span class="tech-tag dark">D&amp;AD Brief</span>
+          </div>
+
+          <div class="proj-desc">
+            <p>
+              An interactive website built in response to the D&amp;AD New Blood
+              Awards 2026 brief for Duolingo, an assignment for the working in
+              digital media team module. The goal: shift the platform's public
+              perception from "unhinged meme owl" to educational pioneer with
+              genuine global impact — targeting the 16–24 age group.
+            </p>
+            <p>
+              The site serves as the campaign's digital backbone, weaving
+              together the team's three outputs: the interactive website, an
+              Instagram UX flow video, and a physical pop-up installation in
+              Leeds. Interactive design elements address AI anxiety, foreground
+              human communication skills, and connect each daily learning streak
+              to Duolingo's 125 million learners worldwide.
+            </p>
+            <p>
+              Entirely <strong>hand-coded in VS Code</strong> — no templates, no
+              website builders — giving full technical and brand control. As the
+              team's web developer, the focus was on translating the campaign
+              strategy into a seamless interactive experience without relying on
+              frameworks.
+            </p>
+          </div>
+
+          <a
+            href="https://bxnt8503.leedsnewmedia.net/Duolingo%20Website/index.html"
+            class="proj-link"
+            target="_blank"
+            rel="noopener"
+          >
+            Live Site <span class="arrow">→</span>
+          </a>
+        </div>
+
+        <div class="proj-visual">
+          <a
+            href="https://bxnt8503.leedsnewmedia.net/Duolingo%20Website/index.html"
+            class="browser-mockup"
+            target="_blank"
+            rel="noopener"
+          >
+            <div class="brow-bar">
+              <div class="brow-dots">
+                <div class="brow-dot r"></div>
+                <div class="brow-dot y"></div>
+                <div class="brow-dot g"></div>
+              </div>
+              <div class="brow-url">
+                Duolingo Impact Website 
+              </div>
+            </div>
+            <div class="brow-screen">
+              <img src="assets/duolingo-hero.jpg" alt="Duolingo Impact Site" />
+            </div>
+          </a>
+
+          <div class="multi-screens">
+            <a
+              href="https://bxnt8503.leedsnewmedia.net/Duolingo%20Website/quiz.html"
+              class="browser-mockup"
+              target="_blank"
+              rel="noopener"
+            >
+              <div class="brow-bar">
+                <div class="brow-dots">
+                  <div class="brow-dot r"></div>
+                  <div class="brow-dot y"></div>
+                  <div class="brow-dot g"></div>
+                </div>
+                <div class="brow-url">Interactive Section</div>
+              </div>
+              <div class="brow-screen">
+                <img
+                  src="assets/duolingo-interact.jpg"
+                  alt="Duolingo Interactive"
+                />
+              </div>
+            </a>
+
+            <a
+              href="https://bxnt8503.leedsnewmedia.net/Duolingo%20Website/data.html"
+              class="browser-mockup"
+              target="_blank"
+              rel="noopener"
+            >
+              <div class="brow-bar">
+                <div class="brow-dots">
+                  <div class="brow-dot r"></div>
+                  <div class="brow-dot y"></div>
+                  <div class="brow-dot g"></div>
+                </div>
+                <div class="brow-url">Global Impact Data</div>
+              </div>
+              <div class="brow-screen">
+                <img src="assets/duolingo-data.jpg" alt="Duolingo Data" />
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══════════════════════════════════════════
+             03  Fire Simulation — Interactive Sensory Website
+        ══════════════════════════════════════════ -->
+      <div class="proj-entry" data-reveal data-reveal-delay="0.05">
+        <div class="proj-text">
+          <span class="proj-num">03</span>
+          <h2 class="proj-title">Fire Simulation Website</h2>
+          <span class="proj-module"
+            >Digital Media &amp; The Senses &nbsp;·&nbsp; Immersive Web</span
+          >
+
+          <div class="tech-stack">
+            <span class="tech-tag">HTML / CSS</span>
+            <span class="tech-tag">JavaScript</span>
+            <span class="tech-tag">Web Audio API</span>
+            <span class="tech-tag dark">Immersive Experience</span>
+            <span class="tech-tag dark">Critical Design</span>
+            <span class="tech-tag dark">Data Feminism</span>
+            <span class="tech-tag dark">Interactive Sensory</span>
+          </div>
+
+          <div class="proj-desc">
+            <p>
+              A critical, immersive web response to the Tai Po Wang Fuk Yuen
+              fire — built to restore what news coverage omits: breath, noise,
+              confusion, and the quiet acts of care that emerge in disaster.
+            </p>
+            <p>
+              The site unfolds across six sequential sections. A drag-and-drop
+              fire interaction triggers alarm audio and transforms a "before"
+              image to "after." A volume slider asks
+              <em>"How much are you willing to hear?"</em> — but keeps the
+              breath and rumble audible even at minimum, because some realities
+              persist. In the darkest section, mouse movement speed controls
+              heartbeat intensity: fast movement = urgency; slow movement =
+              collapse or dying signal.
+            </p>
+            <p>
+              A mandatory 10-second pause in Section 5 applies the principle of
+              slow computing — deliberately interrupting the scroll-past speed
+              of online disaster content. Section 6 invites users to choose a
+              role (bystander, escapee, recorder, silenced) and surfaces missing
+              data: questions that public reporting rarely answers.
+            </p>
+            <p>
+              Grounded in D'Ignazio &amp; Klein's <em>Data Feminism</em> — the
+              argument that what gets counted counts, and what is never recorded
+              shapes whose realities are rendered visible.
+            </p>
+          </div>
+
+          <a
+            href="https://bxnt8503.leedsnewmedia.net/Creative%20Response/daipo_fire.html"
+            class="proj-link"
+            target="_blank"
+            rel="noopener"
+          >
+            Live Site <span class="arrow">→</span>
+          </a>
+        </div>
+
+        <div class="proj-visual">
+          <a
+            href="https://bxnt8503.leedsnewmedia.net/Creative%20Response/daipo_fire.html"
+            class="browser-mockup"
+            target="_blank"
+            rel="noopener"
+          >
+            <div class="brow-bar">
+              <div class="brow-dots">
+                <div class="brow-dot r"></div>
+                <div class="brow-dot y"></div>
+                <div class="brow-dot g"></div>
+              </div>
+              <div class="brow-url">
+                Tai Po Fire Simulation
+              </div>
+            </div>
+            <div class="brow-screen">
+              <img src="assets/fire-hero.jpg" alt="Fire — Section 1" />
+            </div>
+          </a>
+
+          <div class="multi-screens">
+            <a
+              href="https://bxnt8503.leedsnewmedia.net/Creative%20Response/daipo_fire.html"
+              class="browser-mockup"
+              target="_blank"
+              rel="noopener"
+            >
+              <div class="brow-bar">
+                <div class="brow-dots">
+                  <div class="brow-dot r"></div>
+                  <div class="brow-dot y"></div>
+                  <div class="brow-dot g"></div>
+                </div>
+                <div class="brow-url">End of Experience: Want to Help?</div>
+              </div>
+              <div class="brow-screen">
+                <img src="assets/fire-help.jpg" alt="Fire — Dark Section" />
+              </div>
+            </a>
+
+            <a
+              href="https://bxnt8503.leedsnewmedia.net/Creative%20Response/daipo_fire.html"
+              class="browser-mockup"
+              target="_blank"
+              rel="noopener"
+            >
+              <div class="brow-bar">
+                <div class="brow-dots">
+                  <div class="brow-dot r"></div>
+                  <div class="brow-dot y"></div>
+                  <div class="brow-dot g"></div>
+                </div>
+                <div class="brow-url">End of Experience: Want to Know More?</div>
+              </div>
+              <div class="brow-screen">
+                <img src="assets/fire-knowmore.jpg" alt="Fire — Reflection" />
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══════════════════════════════════════════
+             04  InTouch Foundation — Redesign
+        ══════════════════════════════════════════ -->
+      <div class="proj-entry reverse" data-reveal data-reveal-delay="0.05">
+        <div class="proj-text">
+          <span class="proj-num">04</span>
+          <h2 class="proj-title">InTouch Foundation</h2>
+          <span class="proj-module"
+            >UI/UX Redesign &nbsp;·&nbsp; Foundation Project</span
+          >
+
+          <div class="tech-stack">
+            <span class="tech-tag">HTML</span>
+            <span class="tech-tag">CSS</span>
+            <span class="tech-tag dark">UI/UX</span>
+            <span class="tech-tag dark">Charity Sector</span>
+            <span class="tech-tag dark">Accessibility</span>
+          </div>
+
+          <div class="proj-desc">
+            <p>
+              A redesign of the InTouch Foundation — a UK charity supporting
+              underprivileged families through education and healthcare. The
+              original site's primary goals (online donations, volunteer
+              recruitment, event promotion) were buried under an unclear
+              information hierarchy and inconsistent visual language.
+            </p>
+            <p>
+              This project marks the beginning of my journey from graphic design
+              into coding and interface design: the point where visual thinking
+              needed to become something a browser could actually render. The
+              redesign prioritised a cleaner donation flow, clearer
+              calls-to-action, and a more accessible colour and typography
+              system — translating charity-sector design principles into
+              functional HTML and CSS.
+            </p>
+            <p>
+              It is a deliberately humble starting point — but one that shaped
+              how I now approach the relationship between design decisions and
+              their technical implementation.
+            </p>
+          </div>
+
+          <a
+            href="https://bxnt8503.leedsnewmedia.net/Website%20Redesign/InTouch.html"
+            class="proj-link"
+            target="_blank"
+            rel="noopener"
+          >
+            Live Site <span class="arrow">→</span>
+          </a>
+        </div>
+
+        <div class="proj-visual">
+          <div class="multi-screens">
+            <div>
+              <a
+                href="https://www.intouchfoundation.co.uk/"
+                class="browser-mockup"
+                target="_blank"
+                rel="noopener"
+              >
+                <div class="brow-bar">
+                  <div class="brow-dots">
+                    <div class="brow-dot r"></div>
+                    <div class="brow-dot y"></div>
+                    <div class="brow-dot g"></div>
+                  </div>
+                  <div class="brow-url">
+                    intouchfoundation.co.uk - Before
+                  </div>
+                </div>
+                <div class="brow-screen">
+                  <img src="assets/intouch-before.jpg" alt="InTouch — Before" />
+                </div>
+              </a>
+              <p
+                style="
+                  font-size: 10px;
+                  text-align: center;
+                  color: #b2bec3;
+                  margin-top: 8px;
+                  letter-spacing: 1px;
+                  text-transform: uppercase;
+                "
+              >
+                Original
+              </p>
+            </div>
+
+            <div>
+              <a
+                href="https://bxnt8503.leedsnewmedia.net/Website%20Redesign/InTouch.html"
+                class="browser-mockup"
+                target="_blank"
+                rel="noopener"
+              >
+                <div class="brow-bar">
+                  <div class="brow-dots">
+                    <div class="brow-dot r"></div>
+                    <div class="brow-dot y"></div>
+                    <div class="brow-dot g"></div>
+                    </div>
+                  <div class="brow-url">
+                    intouchfoundation.co.uk - After
+                  </div>
+                </div>
+                <div class="brow-screen">
+                  <img src="assets/intouch-after.jpg" alt="InTouch — After" />
+                </div>
+              </a>
+              <p
+                style="
+                  font-size: 10px;
+                  text-align: center;
+                  color: #b2bec3;
+                  margin-top: 8px;
+                  letter-spacing: 1px;
+                  text-transform: uppercase;
+                "
+              >
+                Redesign
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="minimal-footer" id="contact">
+      <div class="footer-container">
+        <div class="footer-column">
+          <h3 class="footer-title">Contact Me</h3>
+          <div class="footer-line"></div>
+          <p>
+            Email:
+            <a href="mailto:hoitungpang@gmail.com">hoitungpang@gmail.com</a>
+          </p>
+          <p>WhatsApp: <a href="tel:+85264139581">+852 6413 9581</a></p>
+        </div>
+        <div class="footer-column">
+          <h3 class="footer-title">Socials</h3>
+          <div class="footer-line"></div>
+          <div class="social-icons">
+            <a href="https://instagram.com/phoebepangs">Instagram</a>
+            <a href="https://www.linkedin.com/in/phoebe-pangs">LinkedIn</a>
+            <a href="https://www.youtube.com/@phoebepaang">YouTube</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-copyright">
+        𐙚₊˚ 2026 © phoebe pang &nbsp;·&nbsp; custom coded ✎ᝰ.
+      </div>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>

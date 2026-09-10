@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Production | PP's Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,700;1,9..144,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+
+        /* ══════════════════════════════════════
+           頁面佈局
+        ══════════════════════════════════════ */
+        .video-wrap {
+            padding: 0 8% 120px 8%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .vid-section {
+            margin-bottom: 130px;
+            padding-bottom: 130px;
+            border-bottom: 1px solid rgba(0,0,0,0.06);
+        }
+
+        .vid-section:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        /* Section 標題列 */
+        .vid-section-header {
+            display: flex;
+            align-items: baseline;
+            gap: 18px;
+            margin-bottom: 48px;
+            padding-bottom: 14px;
+            border-bottom: 1px solid rgba(0,0,0,0.07);
+        }
+
+        .sec-num {
+            font-family: 'Fraunces', serif;
+            font-style: italic;
+            font-size: 0.95rem;
+            color: #a7d7c5;
+            flex-shrink: 0;
+        }
+
+        .vid-section-header h2 {
+            font-size: clamp(1.4rem, 3vw, 2rem);
+            font-weight: 800;
+            margin: 0;
+            color: #1a1a1a;
+            letter-spacing: -0.02em;
+        }
+
+        .sec-sub {
+            font-size: 11px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #b2bec3;
+            margin-left: auto;
+            flex-shrink: 0;
+        }
+
+        /* 技能標籤 */
+        .skill-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 7px;
+            margin-bottom: 22px;
+        }
+
+        .skill-tag {
+            padding: 4px 12px;
+            border-radius: 50px;
+            font-size: 10px;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+        }
+
+        .skill-tag.green {
+            background: rgba(167, 215, 197, 0.12);
+            color: #5aaa8a;
+            border: 1px solid rgba(167, 215, 197, 0.35);
+        }
+
+        .skill-tag.grey {
+            background: #f4f4f4;
+            color: #636e72;
+        }
+
+        /* 說明文字 */
+        .vid-desc {
+            font-size: 14.5px;
+            line-height: 1.85;
+            color: #636e72;
+        }
+
+        .vid-desc p { margin: 0 0 14px 0; }
+        .vid-desc p:last-child { margin-bottom: 0; }
+        .vid-desc strong { color: #2d3436; font-weight: 600; }
+
+        /* 技能細項 */
+        .skills-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-top: 22px;
+        }
+
+        .skill-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 9px 12px;
+            background: rgba(167, 215, 197, 0.05);
+            border-radius: 8px;
+            border: 1px solid rgba(167, 215, 197, 0.1);
+        }
+
+        .skill-item .si-icon { font-size: 13px; flex-shrink: 0; }
+        .skill-item .si-text { font-size: 12px; color: #636e72; font-weight: 500; }
+
+        /* ══════════════════════════════════════
+           手機 Mockup
+        ══════════════════════════════════════ */
+        .phone-frame {
+            position: relative;
+            width: 190px;
+            flex-shrink: 0;
+            background: #111;
+            border-radius: 42px;
+            padding: 14px 12px;
+            box-shadow:
+                0 0 0 1px rgba(255,255,255,0.08),
+                0 24px 56px rgba(0,0,0,0.3),
+                inset 0 0 0 1px rgba(255,255,255,0.04);
+        }
+
+        /* 動態島 */
+        .phone-frame::before {
+            content: '';
+            position: absolute;
+            top: 18px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 52px;
+            height: 7px;
+            background: #222;
+            border-radius: 4px;
+            z-index: 3;
+        }
+
+        .phone-screen {
+            border-radius: 30px;
+            overflow: hidden;
+            aspect-ratio: 9 / 16;
+            background: #000;
+        }
+
+        .phone-screen video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* 手機 label */
+        .phone-label {
+            text-align: center;
+            margin-top: 12px;
+        }
+
+        .phone-label strong {
+            display: block;
+            font-size: 11px;
+            color: #636e72;
+            font-weight: 600;
+        }
+
+        .phone-label span {
+            font-size: 10px;
+            color: #b2bec3;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        /* ══════════════════════════════════════
+           Caption 卡（Section 02 用）
+        ══════════════════════════════════════ */
+        .caption-card {
+            background: #fff;
+            border: 1px solid #eee;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 6px 24px rgba(0,0,0,0.05);
+            display: flex;
+            flex-direction: column;
+            width: 220px;
+            flex-shrink: 0;
+        }
+
+        .caption-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 16px;
+            border-bottom: 1px solid #f5f5f5;
+            flex-shrink: 0;
+        }
+
+        .caption-avatar {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #a7d7c5, #89bfa9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            color: white;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .caption-handle {
+            font-size: 12px;
+            font-weight: 600;
+            color: #1a1a1a;
+        }
+
+        .caption-body {
+            padding: 14px 16px;
+            font-size: 12px;
+            line-height: 1.72;
+            color: #2d3436;
+            overflow-y: auto;
+            flex: 1;
+            scrollbar-width: thin;
+            scrollbar-color: #eee transparent;
+        }
+
+        .caption-tags {
+            padding: 8px 16px 14px;
+            font-size: 10.5px;
+            color: #a7d7c5;
+            line-height: 1.8;
+            flex-shrink: 0;
+        }
+
+        /* ══════════════════════════════════════
+           Section 01 — 左文（窄）右圖（3 支手機）
+        ══════════════════════════════════════ */
+        .internship-layout {
+            display: grid;
+            /* 文字欄收窄，手機欄放寬 */
+            grid-template-columns: 0.55fr 1fr;
+            gap: 60px;
+            align-items: start;
+        }
+
+        /* 三支手機橫排 */
+        .three-phones {
+            display: flex;
+            gap: 22px;
+            align-items: flex-start;
+            justify-content: flex-start;
+        }
+
+        /* ══════════════════════════════════════
+           Section 02 — [手機] [Caption] [文字]
+        ══════════════════════════════════════ */
+        .collab-layout {
+            display: flex;
+            gap: 36px;
+            align-items: flex-start;
+        }
+
+        /* 文字側：填滿剩餘空間 */
+        .collab-text { flex: 1; }
+
+        .collab-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            padding: 5px 14px;
+            background: rgba(167, 215, 197, 0.1);
+            border: 1px solid rgba(167, 215, 197, 0.3);
+            border-radius: 50px;
+            font-size: 10px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: #5aaa8a;
+            font-weight: 600;
+            width: fit-content;
+            margin-bottom: 20px;
+        }
+
+        .collab-badge::before { content: '✦'; font-size: 8px; }
+
+        /* ══════════════════════════════════════
+           Section 03 — SHOOT MV
+        ══════════════════════════════════════ */
+        .mv-layout {
+            display: grid;
+            grid-template-columns: 1fr 1.4fr;
+            gap: 64px;
+            align-items: start;
+        }
+
+        .mv-player {
+            border-radius: 16px;
+            overflow: hidden;
+            background: #0a0a0a;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+        }
+
+        .mv-player video,
+        .mv-player iframe {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            display: block;
+            border: none;
+            object-fit: cover;
+        }
+
+        .concept-card {
+            margin-top: 20px;
+            padding: 16px 18px;
+            background: rgba(167, 215, 197, 0.04);
+            border-left: 2px solid rgba(167, 215, 197, 0.5);
+            border-radius: 0 10px 10px 0;
+        }
+
+        .concept-card .cc-label {
+            font-size: 9px;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            color: #a7d7c5;
+            font-weight: 600;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .concept-card p {
+            font-size: 13px;
+            line-height: 1.75;
+            color: #636e72;
+            margin: 0;
+            font-style: italic;
+        }
+
+        /* ══════════════════════════════════════
+           全螢幕：豎屏影片保持原比例
+           （不撐滿橫向螢幕，兩側留黑邊）
+        ══════════════════════════════════════ */
+
+        /* 標準寫法 */
+        .phone-screen video:fullscreen {
+            width: auto !important;
+            height: 100vh !important;
+            max-width: 100vw;
+            object-fit: contain;
+            background: #000;
+        }
+
+        /* Safari / 舊版 Chrome */
+        .phone-screen video:-webkit-full-screen {
+            width: auto !important;
+            height: 100vh !important;
+            max-width: 100vw;
+            object-fit: contain;
+            background: #000;
+        }
+
+        /* Firefox */
+        .phone-screen video:-moz-full-screen {
+            width: auto !important;
+            height: 100vh !important;
+            max-width: 100vw;
+            object-fit: contain;
+            background: #000;
+        }
+
+        /* ══════════════════════════════════════
+           響應式
+        ══════════════════════════════════════ */
+        @media (max-width: 1100px) {
+            .internship-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .three-phones {
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 900px) {
+            .collab-layout {
+                flex-wrap: wrap;
+            }
+
+            .caption-card {
+                width: 100%;
+                max-width: 340px;
+            }
+
+            .mv-layout {
+                grid-template-columns: 1fr;
+                gap: 36px;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .video-wrap { padding: 0 5% 80px 5%; }
+            .vid-section { margin-bottom: 80px; padding-bottom: 80px; }
+
+            /* 手機版：三支豎屏改為垂直堆疊，每支放大至可觀看 */
+            .three-phones {
+                flex-direction: column;
+                align-items: center;
+                gap: 36px;
+            }
+
+            /* 手機框放大，確保影片清晰可見 */
+            .phone-frame {
+                width: 240px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="cursor-dot"></div>
+    <div class="cursor-outline"></div>
+    <div class="ambient-glow"></div>
+
+    <nav class="glass-nav">
+        <a href="index.html" class="logo">PP'S PORTFOLIO</a>
+        <ul class="nav-links">
+            <li><a href="index.html#work">Work</a></li>
+            <li><a href="index.html#about">About</a></li>
+            <li><a href="index.html#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <header class="detail-header">
+        <a href="index.html" class="back-btn">← Back to Portfolio</a>
+        <h1 class="compact-title">Video Production</h1>
+    </header>
+
+    <main class="video-wrap">
+
+        <!-- ══════════════════════════════════════════
+             Section 01 — 旅行社實習
+             左：窄文字欄   右：3 支豎屏並排
+        ══════════════════════════════════════════ -->
+        <section class="vid-section" data-reveal>
+
+            <div class="vid-section-header">
+                <span class="sec-num">01</span>
+                <h2>Travel Agency Internship</h2>
+                <span class="sec-sub">Summer 2025 &nbsp;·&nbsp; Social Media</span>
+            </div>
+
+            <div class="internship-layout">
+
+                <!-- 左：窄文字 + 技能列表 -->
+                <div>
+                    <div class="skill-stack">
+                        <span class="skill-tag green">Video Editing</span>
+                        <span class="skill-tag green">Script Writing</span>
+                        <span class="skill-tag green">Caption Writing</span>
+                        <span class="skill-tag green">Bilingual Translation</span>
+                        <span class="skill-tag grey">Live Stream</span>
+                        <span class="skill-tag grey">Camera &amp; Sound</span>
+                    </div>
+
+                    <div class="vid-desc">
+                        <p>
+                            Three Reels from a summer 2025 social media internship at a travel agency — a role that transitioned into a remote part-time video creator position.
+                        </p>
+                        <p>
+                            Beyond editing, the role included script writing, bilingual caption writing, audience data analysis, and supporting live streams on camera and sound.
+                        </p>
+                    </div>
+
+                    <div class="skills-list">
+                        <div class="skill-item">
+                            <span class="si-icon">✍️</span>
+                            <span class="si-text">Script Writing</span>
+                        </div>
+                        <div class="skill-item">
+                            <span class="si-icon">✂️</span>
+                            <span class="si-text">Short-Form Video Editing</span>
+                        </div>
+                        <div class="skill-item">
+                            <span class="si-icon">🌐</span>
+                            <span class="si-text">Chinese / English Bilingual Copy</span>
+                        </div>
+                        <div class="skill-item">
+                            <span class="si-icon">📡</span>
+                            <span class="si-text">Live Stream — Camera &amp; Sound</span>
+                        </div>
+                        <div class="skill-item">
+                            <span class="si-icon">📊</span>
+                            <span class="si-text">Audience Analysis</span>
+                        </div>
+                        <div class="skill-item">
+                            <span class="si-icon">💬</span>
+                            <span class="si-text">Caption Writing</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 右：3 支手機並排 -->
+                <div class="three-phones">
+
+                    <div>
+                        <div class="phone-frame">
+                            <div class="phone-screen">
+                                <video src="assets/reel-kenya.mp4" controls playsinline
+                                       poster="assets/reel-kenya-cover.jpg">
+                                </video>
+                            </div>
+                        </div>
+                        <div class="phone-label">
+                            <strong>Kenya</strong>
+                            <span>Great Migration</span>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="phone-frame">
+                            <div class="phone-screen">
+                                <video src="assets/reel-antarctica.mp4" controls playsinline
+                                       poster="assets/reel-antarctica-cover.jpg">
+                                </video>
+                            </div>
+                        </div>
+                        <div class="phone-label">
+                            <strong>Antarctica</strong>
+                            <span>Destination</span>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="phone-frame">
+                            <div class="phone-screen">
+                                <video src="assets/reel-saudi.mp4" controls playsinline
+                                       poster="assets/reel-saudi-cover.jpg">
+                                </video>
+                            </div>
+                        </div>
+                        <div class="phone-label">
+                            <strong>Saudi Arabia</strong>
+                            <span>Destination</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ══════════════════════════════════════════
+             Section 02 — OIAD Brand Collaboration
+             [手機] [Caption 卡] [文字]
+        ══════════════════════════════════════════ -->
+        <section class="vid-section" data-reveal data-reveal-delay="0.05">
+
+            <div class="vid-section-header">
+                <span class="sec-num">02</span>
+                <h2>OIAD × Phoebe Pang</h2>
+                <span class="sec-sub">Brand Collaboration &nbsp;·&nbsp; UGC</span>
+            </div>
+
+            <div class="collab-layout">
+
+                <!-- 手機 -->
+                <div>
+                    <div class="phone-frame">
+                        <div class="phone-screen">
+                            <video src="assets/collab-oiad.mp4" controls playsinline
+                                   poster="assets/collab-oiad-cover.jpg">
+                            </video>
+                        </div>
+                    </div>
+                    <div class="phone-label">
+                        <strong>@phoebepangs</strong>
+                        <span>Instagram Reel</span>
+                    </div>
+                </div>
+
+                <!-- Caption 卡（中間） -->
+                <div class="caption-card">
+                    <div class="caption-header">
+                        <div class="caption-avatar">PP</div>
+                        <span class="caption-handle">phoebepangs</span>
+                    </div>
+                    <div class="caption-body">
+                        ིྀ<strong>𝑶𝒊𝒂𝒅 𝑳𝒊𝒑𝒕𝒊𝒒𝒖𝒆 𝑳𝒊𝒑 𝑷𝒆𝒏𝒄𝒊𝒍</strong> ིྀ 超持色測試 .ᐟ.ᐟ<br><br>
+                        呢款超持久撕拉式唇釉有住超自然的著色&amp;持色力 為雙唇自然染色。000 NEUTE 唔帶豐唇效果 所有膚質都可放心使用🩷<br><br>
+                        玻璃光感唇油可以 keep 住嘴唇 24hrs 濕潤 bling bling!! 輕盈不黏膩，具有自然豐唇效果🫦<br><br>
+                        搭配埋 5 in 1 柔霧持妝唇筆 簡單打造出全效持久立體妝效！<br><br>
+                        見佢賣斷貨12次就知咩料😾my queensss lets go!!!💋
+                    </div>
+                    <div class="caption-tags">
+                        #oiad &nbsp;#oiadhk &nbsp;#liptique &nbsp;#kbeauty
+                    </div>
+                </div>
+
+                <!-- 文字（右） -->
+                <div class="collab-text">
+                    <span class="collab-badge">Gifted Collaboration</span>
+
+                    <div class="skill-stack">
+                        <span class="skill-tag green">Content Creation</span>
+                        <span class="skill-tag green">UGC Video</span>
+                        <span class="skill-tag green">Caption Writing</span>
+                        <span class="skill-tag grey">Influencer Marketing</span>
+                        <span class="skill-tag grey">Brand Partnership</span>
+                    </div>
+
+                    <div class="vid-desc">
+                        <p>
+                            OIAD's marketing team reached out through Instagram to propose a gifted collaboration: products from their new lip collection in exchange for a short promotional Reel.
+                        </p>
+                        <p>
+                            The entire production was handled independently — concept, filming, editing, and the caption. The caption was written to balance genuine product feedback with the engagement hooks that perform on Hong Kong social media: Cantonese tone, product terminology, and a voice that reads as authentic rather than sponsored.
+                        </p>
+                        <p>
+                            <strong>This inbound brand outreach</strong> — without an agency or manager — is a direct measure of content performance and audience trust built through consistent posts.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- ══════════════════════════════════════════
+             Section 03 — HK Vlog
+             左文右影片
+        ══════════════════════════════════════════ -->
+        <section class="vid-section" data-reveal data-reveal-delay="0.05">
+
+            <div class="vid-section-header">
+                <span class="sec-num">03</span>
+                <h2>A Day in Hong Kong Vlog</h2>
+                <span class="sec-sub">Personal Vlog &nbsp;·&nbsp; 1 min</span>
+            </div>
+
+            <div class="mv-layout">
+
+                <!-- 左：文字 -->
+                <div>
+                    <div class="skill-stack">
+                        <span class="skill-tag green">Vlog Editing</span>
+                        <span class="skill-tag green">Colour Grading</span>
+                        <span class="skill-tag green">Sound Design</span>
+                        <span class="skill-tag grey">Personal Style</span>
+                        <span class="skill-tag grey">Lifestyle</span>
+                    </div>
+
+                    <div class="vid-desc">
+                        <p>
+                            A one-minute personal vlog capturing a day out in Hong Kong — wandering the city, then heading to the sea. Shot and edited entirely in my own time, this piece is closest to my natural editing style, with a focus on capturing the essence of everyday moments.
+                        </p>
+                        <p>
+                            Vlog editing is a different discipline from brand or social content — there's no brief, no client, no hook to engineer. The decisions are purely about feel: what to cut, what to let breathe, and how to make an ordinary afternoon worth watching for a minute.
+                        </p>
+                    </div>
+
+                    <div class="concept-card">
+                        <span class="cc-label">Editing Note</span>
+                        <p>
+                            "Vlog is more about recoring a vibe than telling a story. I wanted to capture the feeling of a casual day out — the little moments that make it special, without forcing a narrative arc."
+                        </p>
+                    </div>
+                </div>
+
+                <!-- 右：橫屏影片 -->
+                <div>
+                    <div class="mv-player">
+                        <video src="assets/vlog.mp4" controls
+                               poster="assets/vlog_cover.jpg">
+                        </video>
+                        <!--
+                            YouTube embed 版本：
+                            <iframe src="https://www.youtube.com/embed/VIDEO_ID?rel=0"
+                                    title="HK Vlog" allowfullscreen></iframe>
+                        -->
+                    </div>
+                    <div style="margin-top:14px;display:flex;justify-content:space-between;padding:0 2px;">
+                        <span style="font-size:12px;color:#636e72;font-weight:600;">A Day in HK &nbsp;—&nbsp; 去看海的一天</span>
+                        <span style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#a7d7c5;">Vlog · 1 min</span>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- ══════════════════════════════════════════
+             Section 04 — SHOOT MV
+             左影片右文字（reverse）
+        ══════════════════════════════════════════ -->
+        <section class="vid-section" data-reveal data-reveal-delay="0.05">
+
+            <div class="vid-section-header">
+                <span class="sec-num">04</span>
+                <h2>SHOOT — Short Film MV</h2>
+                <span class="sec-sub">School Group Project &nbsp;·&nbsp; Cinematography</span>
+            </div>
+
+            <!-- reverse：影片在左，文字在右 -->
+            <div class="mv-layout" style="direction:rtl;">
+                <!-- direction:rtl 只是翻轉欄順序，內容用 direction:ltr 還原 -->
+
+                <!-- 右欄（視覺上在右，但因 rtl 排在左邊的 DOM 位置） -->
+                <div style="direction:ltr;">
+                    <div class="skill-stack">
+                        <span class="skill-tag green">Cinematography</span>
+                        <span class="skill-tag green">Video Editing</span>
+                        <span class="skill-tag green">Creative Direction</span>
+                        <span class="skill-tag grey">Music Video</span>
+                        <span class="skill-tag grey">Narrative Storytelling</span>
+                    </div>
+
+                    <div class="vid-desc">
+                        <p>
+  A secondary school group project MV shot to ITZY's 《SHOOT!》 —
+                a song about demanding clarity in love that doubles as a
+                declaration of self-confidence.                        </p>
+                        <p>
+The narrative follows a girl who is self-conscious, constantly
+                envying the way other people seem to shine — until she decides
+                to stop. The MV ends not with a love story but a resolution:
+                <em>everyone can be a Queen</em>.                        </p>
+                        <p>
+                            Camera angles were drawn from stage performance aesthetics to keep the energy grounded in the music.
+                        </p>
+                    </div>
+
+                    <div class="concept-card">
+                        <span class="cc-label">Concept Note</span>
+                        <p>
+                            "《SHOOT!》 is ostensibly about demanding an answer from an indecisive boy — but the confidence underneath belongs entirely to the girl. Stepping into your own light isn't about anyone else noticing."
+                        </p>
+                    </div>
+                </div>
+
+                <!-- 左欄（視覺上在左） -->
+                <div style="direction:ltr;">
+                    <div class="mv-player">
+                        <video src="assets/shoot-mv.mp4" controls
+                               poster="assets/shoot-mv-cover.jpg">
+                        </video>
+                        <!--
+                            YouTube embed：
+                            <iframe src="https://www.youtube.com/embed/VIDEO_ID?rel=0"
+                                    title="SHOOT MV" allowfullscreen></iframe>
+                        -->
+                    </div>
+                    <div style="margin-top:14px;display:flex;justify-content:space-between;padding:0 2px;">
+                        <span style="font-size:12px;color:#636e72;font-weight:600;">SHOOT! &nbsp;—&nbsp; ITZY</span>
+                        <span style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#a7d7c5;">MV · School Project</span>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="minimal-footer" id="contact">
+        <div class="footer-container">
+            <div class="footer-column">
+                <h3 class="footer-title">Contact Me</h3>
+                <div class="footer-line"></div>
+                <p>Email: <a href="mailto:hoitungpang@gmail.com">hoitungpang@gmail.com</a></p>
+                <p>WhatsApp: <a href="tel:+85264139581">+852 6413 9581</a></p>
+            </div>
+            <div class="footer-column">
+                <h3 class="footer-title">Socials</h3>
+                <div class="footer-line"></div>
+                <div class="social-icons">
+                    <a href="https://instagram.com/phoebepangs">Instagram</a>
+                    <a href="https://www.linkedin.com/in/phoebe-pangs">LinkedIn</a>
+                    <a href="https://www.youtube.com/@phoebepaang">YouTube</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-copyright">
+            𐙚₊˚ 2026 © phoebe pang &nbsp;·&nbsp; custom coded ✎ᝰ.
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

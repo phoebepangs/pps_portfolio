@@ -1,0 +1,433 @@
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Graphic Design | PP's Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,700;0,9..144,900;1,9..144,400;1,9..144,700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <style>
+      /* ── 此頁面專用樣式 ── */
+
+      .entry-tags {
+        font-size: 11px;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: #a7d7c5;
+        margin: 8px 0 18px 0;
+        font-weight: 500;
+      }
+
+      .entry-desc {
+        font-size: 15px;
+        line-height: 1.75;
+        color: #636e72;
+        max-width: 400px;
+      }
+
+      .entry-image {
+        cursor: zoom-in;
+      }
+
+      /* ── Sérenade de Paris ── */
+      .graphic-entry-campaign {
+        display: flex;
+        flex-direction: column;
+        gap: 50px;
+      }
+
+      .campaign-top {
+        display: grid;
+        grid-template-columns: 1fr 1.5fr;
+        gap: 80px;
+        align-items: start;
+      }
+
+      .campaign-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+      }
+
+      .campaign-grid-item {
+        overflow: hidden;
+        border-radius: 12px;
+        cursor: zoom-in;
+        background: #eef2ef;
+        transition:
+          transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+          box-shadow 0.4s ease;
+      }
+
+      .campaign-grid-item:hover {
+        transform: translateY(-4px) scale(1.01);
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+      }
+
+      .campaign-grid-item img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+
+      .campaign-banners {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .banner-item {
+        border-radius: 12px;
+        overflow: hidden;
+        cursor: zoom-in;
+        transition: transform 0.3s ease;
+      }
+
+      .banner-item:hover {
+        transform: scale(1.01);
+      }
+
+      .banner-item img {
+        width: 100%;
+        display: block;
+        object-fit: cover;
+      }
+
+      /* ── 雙圖橫排（Membership Card）── */
+      .dual-image {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+      }
+
+      .dual-image .campaign-grid-item {
+        aspect-ratio: 3 / 4;
+      }
+
+      .graphic-list {
+        gap: 160px;
+      }
+
+      /* ── Lightbox ── */
+      #lightbox {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.96);
+        backdrop-filter: blur(16px);
+        z-index: 9998;
+        justify-content: center;
+        align-items: center;
+      }
+
+      #lightbox img {
+        max-width: 88vw;
+        max-height: 88vh;
+        border-radius: 12px;
+        object-fit: contain;
+        box-shadow: 0 24px 60px rgba(0, 0, 0, 0.5);
+      }
+
+      .lightbox-close {
+        position: absolute;
+        top: 28px;
+        right: 36px;
+        font-size: 36px;
+        color: rgba(255, 255, 255, 0.7);
+        cursor: pointer;
+        line-height: 1;
+        transition: color 0.2s;
+      }
+
+      .lightbox-close:hover {
+        color: #a7d7c5;
+      }
+
+      @media (max-width: 768px) {
+        .campaign-top {
+          grid-template-columns: 1fr;
+          gap: 30px;
+        }
+        .campaign-grid {
+          grid-template-columns: 1fr 1fr;
+        }
+        .dual-image {
+          grid-template-columns: 1fr;
+        }
+        .graphic-list {
+          gap: 80px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="cursor-dot"></div>
+    <div class="cursor-outline"></div>
+    <div class="ambient-glow"></div>
+
+    <!-- Lightbox -->
+    <div id="lightbox" onclick="if (event.target === this) closeLightbox();">
+      <span class="lightbox-close" onclick="closeLightbox()">×</span>
+      <img id="lightbox-img" src="" alt="" />
+    </div>
+
+    <!-- 導航欄 -->
+    <nav class="glass-nav">
+      <a href="index.html" class="logo">PP'S PORTFOLIO</a>
+      <ul class="nav-links">
+        <li><a href="index.html#work">Work</a></li>
+        <li><a href="index.html#about">About</a></li>
+        <li><a href="graphic-design.html#contact">Contact</a></li>
+      </ul>
+    </nav>
+
+    <!-- 頁面標題 -->
+    <header class="detail-header">
+      <a href="index.html" class="back-btn">← Back to Portfolio</a>
+      <h1 class="compact-title">Graphic Design</h1>
+    </header>
+
+    <!-- 作品列表 -->
+    <main class="gallery-container">
+      <div class="graphic-list">
+        <!-- ═══ 01: LUUHKSOC Membership Card ═══ -->
+        <!-- reverse class + dual-image first → 圖左文右 -->
+        <div class="graphic-entry reverse" data-reveal data-reveal-delay="0.05">
+          <div class="dual-image">
+            <div
+              class="campaign-grid-item"
+              onclick="openLightbox('assets/Membership_Card_Showcase.png')"
+            >
+              <img
+                src="assets/Membership_Card_Showcase.png"
+                alt="Membership Card Showcase"
+              />
+            </div>
+            <div
+              class="campaign-grid-item"
+              onclick="openLightbox('assets/Membership_Card_Design.png')"
+            >
+              <img
+                src="assets/Membership_Card_Design.png"
+                alt="Membership Card Design"
+              />
+            </div>
+          </div>
+          <div class="entry-text">
+            <span class="entry-num">01</span>
+            <h3>LUUHKSOC Membership Card</h3>
+            <p class="entry-tags">
+              Illustrator &nbsp;·&nbsp; Print Design &nbsp;·&nbsp; Branding
+            </p>
+            <p class="entry-desc">
+              Physical membership card designed for Leeds University Union Hong
+              Kong Society for the 2025–26 academic year, as Publicity Officer.
+              A deep teal textured background references traditional Chinese
+              craft papers; four red circular badges bearing 香港學會 (Hong Kong
+              Society) in Chinese characters draw from classic HK branding. Gold
+              letterpress-style typography and the society's logo complete the
+              front face. Produced in CMYK at 300 DPI, printed as a physical
+              credit-card format. <br />
+              <br />
+              Instgram:
+              <a
+                href="https://www.instagram.com/luhksoc?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
+                target="_blank"
+                rel="noopener"
+                >@luhksoc </a
+              >that I was responsible for managing posts and announcements
+              during this academic year, including the card reveal and event
+              publishing.
+            </p>
+          </div>
+        </div>
+
+        <!-- ═══ 02: Sérenade de Paris — Multiformat Campaign ═══ -->
+        <div
+          class="graphic-entry-campaign"
+          data-reveal
+          data-reveal-delay="0.05"
+        >
+          <div class="campaign-top">
+            <div class="entry-text">
+              <span class="entry-num">02</span>
+              <h3>Sérenade de Paris</h3>
+              <p class="entry-tags">
+                Illustrator · Photoshop · Web Design · Campaign
+              </p>
+              <p class="entry-desc">
+                A multiformat campaign for a fictional Paris fashion and music
+                festival. Deliverables span a 4-page responsive website, an A4
+                event poster, three ticket tiers (General, VIP, Premium),
+                merchandise (keychains, T-shirts, coasters), and web banners in
+                different sizes. The handwritten "PARIS" wordmark replaces the
+                "A" with an Eiffel Tower illustration, tying the campaign
+                together visually.
+              </p>
+            </div>
+
+            <div class="campaign-grid">
+              <div
+                class="campaign-grid-item"
+                style="aspect-ratio: 683/1170"
+                onclick="openLightbox('assets/Website_Page_1.png')"
+              >
+                <img src="assets/Website_Page_1.png" alt="Home Page" />
+              </div>
+              <div
+                class="campaign-grid-item"
+                style="aspect-ratio: 683/1170"
+                onclick="openLightbox('assets/Website_Page_2.png')"
+              >
+                <img src="assets/Website_Page_2.png" alt="About Page" />
+              </div>
+              <div
+                class="campaign-grid-item"
+                style="aspect-ratio: 3/4"
+                onclick="openLightbox('assets/Website_Page_3.png')"
+              >
+                <img src="assets/Website_Page_3.png" alt="Ticket Page" />
+              </div>
+              <div
+                class="campaign-grid-item"
+                style="aspect-ratio: 3/4"
+                onclick="openLightbox('assets/Website_Page_4.png')"
+              >
+                <img src="assets/Website_Page_4.png" alt="Merch Page" />
+              </div>
+            </div>
+          </div>
+
+          <div class="campaign-banners">
+            <div
+              class="banner-item"
+              onclick="openLightbox('assets/Web_Banner_3.png')"
+            >
+              <img src="assets/Web_Banner_3.png" alt="Leaderboard Banner" />
+            </div>
+            <div
+              class="banner-item"
+              onclick="openLightbox('assets/Web_Banner_2.png')"
+            >
+              <img src="assets/Web_Banner_2.png" alt="Rectangle Banner" />
+            </div>
+          </div>
+        </div>
+
+        <!-- ═══ 03: The Decline of Cantonese ═══ -->
+        <!-- 原圖是直幅 1840×2600，用 aspect-ratio:auto + object-fit:contain 顯示完整 -->
+        <div class="graphic-entry reverse" data-reveal data-reveal-delay="0.05">
+          <div
+            class="entry-image"
+            style="
+              aspect-ratio: auto;
+              max-width: 100%;
+              background: transparent;
+              overflow: visible;
+            "
+            onclick="openLightbox('assets/The_Decline_of_Cantonese_Poster.jpg')"
+          >
+            <img
+              src="assets/The_Decline_of_Cantonese_Poster.jpg"
+              alt="The Decline of Cantonese Poster"
+              style="
+                width: 100%;
+                height: auto;
+                object-fit: contain;
+                display: block;
+              "
+            />
+          </div>
+          <div class="entry-text">
+            <span class="entry-num">03</span>
+            <h3>The Decline of Cantonese</h3>
+            <p class="entry-tags">
+              Illustrator &nbsp;·&nbsp; Editorial Design &nbsp;·&nbsp;
+              Infographic
+            </p>
+            <p class="entry-desc">
+              A design-for-social-change poster exploring the political,
+              educational, and cultural forces behind the decline of Cantonese
+              in Hong Kong. Built around a stylised map of HK with
+              hand-illustrated landmarks — including a tram, minibus, and
+              Victoria Harbour skyline — alongside archival-style stamps and
+              text cards covering the 2014 Umbrella Movement, 2019 protests, and
+              curriculum reforms. Produced in RGB at 1920 × 1080 px.
+            </p>
+          </div>
+        </div>
+
+        <!-- ═══ 04: UpStage Logo Redesign ═══ -->
+        <!-- 透明底 logo：移除背景色和邊框，aspect-ratio 1/1 配合圓形設計 -->
+        <div class="graphic-entry" data-reveal>
+          <div class="entry-text">
+            <span class="entry-num">04</span>
+            <h3>UpStage — Logo Redesign</h3>
+            <p class="entry-tags">
+              Illustrator &nbsp;·&nbsp; Brand Identity &nbsp;·&nbsp; Print
+            </p>
+            <p class="entry-desc">
+              A brand identity redesign for UpStage, a Leeds-based vintage
+              clothing store with a theatrical, retro character. The new logo
+              integrates a clothes hanger, pairing the Academy Engraved and
+              Bodoni 72 Smallcaps typefaces. A warm cream base, forest green,
+              and dusty rose create the vintage palette. Produced in CMYK at 300
+              DPI, with black-and-white variants for monotone print.
+            </p>
+          </div>
+          <div
+            class="entry-image"
+            style="
+              aspect-ratio: 1/1;
+              background: transparent;
+              border: none;
+              max-width: 480px;
+            "
+            onclick="openLightbox('assets/UpStage_Logo_Redesign.png')"
+          >
+            <img
+              src="assets/UpStage_Logo_Redesign.png"
+              alt="UpStage Logo Redesign"
+              style="object-fit: contain"
+            />
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="minimal-footer" id="contact">
+      <div class="footer-container">
+        <div class="footer-column">
+          <h3 class="footer-title">Contact Me</h3>
+          <div class="footer-line"></div>
+          <p>
+            Email:
+            <a href="mailto:hoitungpang@gmail.com">hoitungpang@gmail.com</a>
+          </p>
+          <p>WhatsApp: <a href="tel:+85264139581">+852 6413 9581</a></p>
+        </div>
+        <div class="footer-column">
+          <h3 class="footer-title">Socials</h3>
+          <div class="footer-line"></div>
+          <div class="social-icons">
+            <a href="https://instagram.com/phoebepangs">Instagram</a>
+            <a href="https://www.linkedin.com/in/phoebe-pangs">LinkedIn</a>
+            <a href="https://www.youtube.com/@phoebepaang">YouTube</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-copyright">
+        𐙚₊˚ 2026 © phoebe pang &nbsp;·&nbsp; custom coded ✎ᝰ.
+      </div>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>

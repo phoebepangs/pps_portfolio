@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Photography | PP's Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,700;1,9..144,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+
+        /* ══════════════════════════════════════
+           Section 佈局
+        ══════════════════════════════════════ */
+        .photo-page-wrap {
+            padding: 0 8% 120px 8%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* Section 標題列 */
+        .photo-section {
+            margin-bottom: 110px;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: baseline;
+            gap: 20px;
+            margin-bottom: 36px;
+            padding-bottom: 14px;
+            border-bottom: 1px solid rgba(0,0,0,0.08);
+        }
+
+        .section-num {
+            font-family: 'Fraunces', serif;
+            font-style: italic;
+            font-size: 1rem;
+            color: #a7d7c5;
+            flex-shrink: 0;
+        }
+
+        .section-header h2 {
+            font-size: clamp(1.4rem, 3vw, 2rem);
+            font-weight: 800;
+            margin: 0;
+            color: #1a1a1a;
+            letter-spacing: -0.02em;
+        }
+
+        .section-header .header-sub {
+            font-size: 11px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #b2bec3;
+            margin-left: auto;
+            flex-shrink: 0;
+        }
+
+        /* ══════════════════════════════════════
+           通用圖片卡片
+        ══════════════════════════════════════ */
+        .grid-item {
+            display: flex;
+            flex-direction: column;
+            cursor: zoom-in;
+        }
+
+        .img-frame {
+            overflow: hidden;
+            border-radius: 6px;
+            background: #eef2ef;
+            position: relative;
+        }
+
+        .img-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .grid-item:hover .img-frame img {
+            transform: scale(1.04);
+        }
+
+        /* Credit 行 */
+        .photo-credit {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 10px;
+            padding: 0 2px;
+        }
+
+        .credit-left {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .credit-name {
+            font-size: 11px;
+            color: #636e72;
+            font-style: italic;
+            letter-spacing: 0.3px;
+        }
+
+        .credit-role {
+            font-size: 10px;
+            color: #b2bec3;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .credit-tag {
+            font-size: 10px;
+            color: #a7d7c5;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
+        /* ══════════════════════════════════════
+           Section 01 — 混合方向網格
+        ══════════════════════════════════════ */
+        .mixed-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 14px;
+        }
+
+        /* 豎屏照片 */
+        .grid-item.portrait .img-frame {
+            aspect-ratio: 2 / 3;
+        }
+
+        /* 橫屏照片：佔 2 欄 */
+        .grid-item.landscape {
+            grid-column: span 2;
+        }
+
+        .grid-item.landscape .img-frame {
+            aspect-ratio: 16 / 9;
+        }
+
+        /* ══════════════════════════════════════
+           Section 02 — 全豎屏 3 欄
+        ══════════════════════════════════════ */
+        .portrait-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 14px;
+        }
+
+        .portrait-grid .grid-item .img-frame {
+            aspect-ratio: 2 / 3;
+        }
+
+        /* ══════════════════════════════════════
+           Section 03 — 影片
+        ══════════════════════════════════════ */
+        .video-wrap {
+            border-radius: 20px;
+            overflow: hidden;
+            background: #0a0a0a;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.12);
+        }
+
+        .video-wrap video {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            display: block;
+            object-fit: cover;
+        }
+
+        /* 影片下方說明 */
+        .video-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 14px;
+            padding: 0 2px;
+        }
+
+        .video-meta .vm-title {
+            font-size: 13px;
+            color: #2d3436;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        .video-meta .vm-tag {
+            font-size: 10px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #a7d7c5;
+            font-weight: 600;
+        }
+
+        /* ══════════════════════════════════════
+           Lightbox
+        ══════════════════════════════════════ */
+        #lightbox {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.97);
+            backdrop-filter: blur(18px);
+            z-index: 9998;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #lightbox img {
+            max-width: 90vw;
+            max-height: 90vh;
+            border-radius: 8px;
+            object-fit: contain;
+            box-shadow: 0 30px 80px rgba(0,0,0,0.6);
+        }
+
+        .lb-close {
+            position: absolute;
+            top: 28px;
+            right: 36px;
+            font-size: 38px;
+            color: rgba(255,255,255,0.55);
+            cursor: pointer;
+            line-height: 1;
+            transition: color 0.2s;
+        }
+
+        .lb-close:hover { color: #a7d7c5; }
+
+        /* ══════════════════════════════════════
+           響應式
+        ══════════════════════════════════════ */
+        @media (max-width: 900px) {
+            .mixed-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            /* 橫屏在小螢幕改回 1 欄 */
+            .grid-item.landscape {
+                grid-column: span 2;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .photo-page-wrap { padding: 0 5% 80px 5%; }
+
+            .mixed-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 8px;
+            }
+            .grid-item.landscape {
+                grid-column: span 2;
+            }
+
+            .portrait-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="cursor-dot"></div>
+    <div class="cursor-outline"></div>
+    <div class="ambient-glow"></div>
+
+    <!-- Lightbox -->
+    <div id="lightbox" onclick="if(event.target===this)closeLightbox()">
+        <span class="lb-close" onclick="closeLightbox()">×</span>
+        <img id="lightbox-img" src="" alt="">
+    </div>
+
+    <!-- 導航欄 -->
+    <nav class="glass-nav">
+        <a href="index.html" class="logo">PP'S PORTFOLIO</a>
+        <ul class="nav-links">
+            <li><a href="index.html#work">Work</a></li>
+            <li><a href="index.html#about">About</a></li>
+            <li><a href="photo.html#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- 頁面標題 -->
+    <header class="detail-header">
+        <a href="index.html" class="back-btn">← Back to Portfolio</a>
+        <h1 class="compact-title">Modelling</h1>
+    </header>
+
+    <main class="photo-page-wrap">
+
+        <!-- ════════════════════════════════════
+             Section 01 — HK Portrait Shoot
+             7 張，有橫有豎
+             將橫屏照加上 class="landscape"
+             豎屏照加上 class="portrait"
+        ════════════════════════════════════ -->
+        <section class="photo-section" data-reveal>
+
+            <div class="section-header">
+                <span class="section-num">01</span>
+                <h2>HK Portrait Shoot</h2>
+                <span class="header-sub">Hong Kong &nbsp;·&nbsp; 2024</span>
+            </div>
+
+            <div class="mixed-grid">
+
+                <!-- ── 豎屏 ── -->
+                <div class="grid-item portrait" onclick="openLightbox('assets/hk-01.jpg')">
+                    <div class="img-frame">
+                        <img src="assets/hk-01.jpg" alt="HK Portrait 01">
+                    </div>
+                    <div class="photo-credit">
+                        <div class="credit-left">
+                            <span class="credit-name">© lumen.frame.studio</span>
+                            <span class="credit-role">Photography</span>
+                        </div>
+                        <span class="credit-tag">HK</span>
+                    </div>
+                </div>
+
+                <!-- ── 豎屏 ── -->
+                <div class="grid-item portrait" onclick="openLightbox('assets/hk-02.jpg')">
+                    <div class="img-frame">
+                        <img src="assets/hk-02.jpg" alt="HK Portrait 02">
+                    </div>
+                    <div class="photo-credit">
+                        <div class="credit-left">
+                            <span class="credit-name">© lumen.frame.studio</span>
+                            <span class="credit-role">Photography</span>
+                        </div>
+                        <span class="credit-tag">HK</span>
+                    </div>
+                </div>
+
+                <!-- ── 豎屏 ── -->
+                <div class="grid-item portrait" onclick="openLightbox('assets/hk-03.jpg')">
+                    <div class="img-frame">
+                        <img src="assets/hk-03.jpg" alt="HK Portrait 03">
+                    </div>
+                    <div class="photo-credit">
+                        <div class="credit-left">
+                            <span class="credit-name">© lumen.frame.studio</span>
+                            <span class="credit-role">Photography</span>
+                        </div>
+                        <span class="credit-tag">HK</span>
+                    </div>
+                </div>
+
+                <!-- ── 橫屏（佔 2 欄）── -->
+                <div class="grid-item landscape" onclick="openLightbox('assets/hk-04.jpg')">
+                    <div class="img-frame">
+                        <img src="assets/hk-04.jpg" alt="HK Portrait 04">
+                    </div>
+                    <div class="photo-credit">
+                        <div class="credit-left">
+                            <span class="credit-name">© lumen.frame.studio</span>
+                            <span class="credit-role">Photography</span>
+                        </div>
+                        <span class="credit-tag">HK</span>
+                    </div>
+                </div>
+
+                <!-- ── 豎屏 ── -->
+                <div class="grid-item portrait" onclick="openLightbox('assets/hk-05.jpg')">
+                    <div class="img-frame">
+                        <img src="assets/hk-05.jpg" alt="HK Portrait 05">
+                    </div>
+                    <div class="photo-credit">
+                        <div class="credit-left">
+                            <span class="credit-name">© lumen.frame.studio</span>
+                            <span class="credit-role">Photography</span>
+                        </div>
+                        <span class="credit-tag">HK</span>
+                    </div>
+                </div>
+
+                <!-- ── 豎屏 ── -->
+                <div class="grid-item portrait" onclick="openLightbox('assets/hk-06.jpg')">
+                    <div class="img-frame">
+                        <img src="assets/hk-06.jpg" alt="HK Portrait 06">
+                    </div>
+                    <div class="photo-credit">
+                        <div class="credit-left">
+                            <span class="credit-name">© lumen.frame.studio</span>
+                            <span class="credit-role">Photography</span>
+                        </div>
+                        <span class="credit-tag">HK</span>
+                    </div>
+                </div>
+
+                <!-- ── 橫屏（佔 2 欄） ── -->
+                <div class="grid-item landscape" onclick="openLightbox('assets/hk-07.jpg')">
+                    <div class="img-frame">
+                        <img src="assets/hk-07.jpg" alt="HK Portrait 07">
+                    </div>
+                    <div class="photo-credit">
+                        <div class="credit-left">
+                            <span class="credit-name">© lumen.frame.studio</span>
+                            <span class="credit-role">Photography</span>
+                        </div>
+                        <span class="credit-tag">HK</span>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- ════════════════════════════════════
+             Section 02 — 鳳凰木
+             6 張，全豎屏，3 欄
+        ════════════════════════════════════ -->
+        <section class="photo-section" data-reveal data-reveal-delay="0.05">
+
+            <div class="section-header">
+                <span class="section-num">02</span>
+                <h2>鳳凰木</h2>
+                <span class="header-sub">Hong Kong &nbsp;·&nbsp; 2025</span>
+            </div>
+
+            <div class="portrait-grid">
+
+                <div class="grid-item" onclick="openLightbox('assets/fhm-01.jpg')">
+                    <div class="img-frame">
+                        <img src="assets/fhm-01.jpg" alt="鳳凰木 01">
+                    </div>
+                    <div class="photo-credit">
+                        <div class="credit-left">
+                            <span class="credit-name">© whykevinphotography</span>
+                            <span class="credit-role">Photography</span>
+                        </div>
+                        <span class="credit-tag">Film</span>
+                    </div>
+                </div>
+
+                <div class="grid-item" onclick="openLightbox('assets/fhm-02.jpg')">
+                    <div class="img-frame">
+                        <img src="assets/fhm-02.jpg" alt="鳳凰木 02">
+                    </div>
+                    <div class="photo-credit">
+                        <div class="credit-left">
+                            <span class="credit-name">© whykevinphotography</span>
+                            <span class="credit-role">Photography</span>
+                        </div>
+                        <span class="credit-tag">Film</span>
+                    </div>
+                </div>
+
+                <div class="grid-item" onclick="openLightbox('assets/fhm-03.jpg')">
+                    <div class="img-frame">
+                        <img src="assets/fhm-03.jpg" alt="鳳凰木 03">
+                    </div>
+                    <div class="photo-credit">
+                        <div class="credit-left">
+                            <span class="credit-name">© whykevinphotography</span>
+                            <span class="credit-role">Photography</span>
+                        </div>
+                        <span class="credit-tag">Film</span>
+                    </div>
+                </div>
+
+                <div class="grid-item" onclick="openLightbox('assets/fhm-04.jpg')">
+                    <div class="img-frame">
+                        <img src="assets/fhm-04.jpg" alt="鳳凰木 04">
+                    </div>
+                    <div class="photo-credit">
+                        <div class="credit-left">
+                            <span class="credit-name">© whykevinphotography</span>
+                            <span class="credit-role">Photography</span>
+                        </div>
+                        <span class="credit-tag">Film</span>
+                    </div>
+                </div>
+
+                <div class="grid-item" onclick="openLightbox('assets/fhm-05.jpg')">
+                    <div class="img-frame">
+                        <img src="assets/fhm-05.jpg" alt="鳳凰木 05">
+                    </div>
+                    <div class="photo-credit">
+                        <div class="credit-left">
+                            <span class="credit-name">© whykevinphotography</span>
+                            <span class="credit-role">Photography</span>
+                        </div>
+                        <span class="credit-tag">Film</span>
+                    </div>
+                </div>
+
+                <div class="grid-item" onclick="openLightbox('assets/fhm-06.jpg')">
+                    <div class="img-frame">
+                        <img src="assets/fhm-06.jpg" alt="鳳凰木 06">
+                    </div>
+                    <div class="photo-credit">
+                        <div class="credit-left">
+                            <span class="credit-name">© whykevinphotography</span>
+                            <span class="credit-role">Photography</span>
+                        </div>
+                        <span class="credit-tag">Film</span>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- ════════════════════════════════════
+             Section 03 — 鳳凰木 Videography
+             橫屏影片
+        ════════════════════════════════════ -->
+        <section class="photo-section" data-reveal data-reveal-delay="0.05">
+
+            <div class="section-header">
+                <span class="section-num">03</span>
+                <h2>鳳凰木 — Videography</h2>
+                <span class="header-sub">Hong Kong · 2025</span>
+            </div>
+
+            <div class="video-wrap">
+                <!--
+                    換成你的影片路徑。
+                    支援 .mp4 / .mov（建議轉成 mp4 再用）
+                    autoplay muted loop 可選加上——加了會靜音自動播
+                -->
+                <video controls preload="metadata" poster="assets/fhm-video-cover.jpg">
+                    <source src="assets/fhm-video.mp4" type="video/mp4">
+                    你的瀏覽器不支援影片播放。
+                </video>
+            </div>
+
+            <div class="video-meta">
+                <span class="vm-title">鳳凰木 &nbsp;/&nbsp; A Day in Ruins</span>
+                <span class="vm-tag">Videography · Life</span>
+                <span class="credit-name">© whykevinphotography</span>
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="minimal-footer" id="contact">
+        <div class="footer-container">
+            <div class="footer-column">
+                <h3 class="footer-title">Contact Me</h3>
+                <div class="footer-line"></div>
+                <p>Email: <a href="mailto:hoitungpang@gmail.com">hoitungpang@gmail.com</a></p>
+                <p>WhatsApp: <a href="tel:+85264139581">+852 6413 9581</a></p>
+            </div>
+            <div class="footer-column">
+                <h3 class="footer-title">Socials</h3>
+                <div class="footer-line"></div>
+                <div class="social-icons">
+                    <a href="https://instagram.com/phoebepangs">Instagram</a>
+                    <a href="https://www.linkedin.com/in/phoebe-pangs">LinkedIn</a>
+                    <a href="https://www.youtube.com/@phoebepaang">YouTube</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-copyright">
+            𐙚₊˚ 2026 © phoebe pang &nbsp;·&nbsp; custom coded ✎ᝰ.
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

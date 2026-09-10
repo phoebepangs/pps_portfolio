@@ -1,0 +1,511 @@
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Phoebe Pang's Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;0,9..144,900;1,9..144,400;1,9..144,700;1,9..144,900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+
+    <!-- Open Graph：控制分享預覽 -->
+    <meta name="description" content="Phoebe Pang — Digital Media Creator. Video Production · Graphic Design · Programming · UI/UX · Model">
+    <meta property="og:title" content="Phoebe Pang's Portfolio" />
+    <meta
+      property="og:description"
+      content="Video Production · Graphic Design · Programming · UI/UX · Model"
+    />
+    <meta
+      property="og:image"
+      content="https://bxnt8503.leedsnewmedia.net/Phoebe%20Pang's%20Portfolio/assets/og-cover.jpg"
+    />
+    <meta
+      property="og:url"
+      content="https://bxnt8503.leedsnewmedia.net/Phoebe%20Pang's%20Portfolio/index.html"
+    />
+    <meta property="og:type" content="website" />
+
+    <!-- WhatsApp / iMessage 也用這個 -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:image"
+      content="https://bxnt8503.leedsnewmedia.net/Phoebe%20Pang's%20Portfolio/assets/og-cover.jpg"
+    />
+  </head>
+  <body>
+    <!-- 自訂鼠標 -->
+    <div class="cursor-dot"></div>
+    <div class="cursor-outline"></div>
+
+    <!-- 環境光暈（跟隨鼠標） -->
+    <div class="ambient-glow"></div>
+
+    <!-- 導航欄 -->
+    <nav class="glass-nav">
+      <a href="index.html" class="logo">PP'S PORTFOLIO</a>
+      <ul class="nav-links">
+        <li><a href="#work">作品</a></li>
+        <li><a href="#about">關於</a></li>
+        <li><a href="#contact">聯絡</a></li>
+      </ul>
+      <ul class="nav-links">
+        <li><a href="index.html">中文</a></li>
+        <li><a href="index-en.html">EN</a></li>
+      </ul>
+    </nav>
+
+    <!-- ════════════ HERO ════════════ -->
+    <section class="hero">
+      <!-- 背景大裝飾字 -->
+      <div class="hero-bg-text" aria-hidden="true">CREATIVE</div>
+
+      <!-- 浮動幾何粒子 -->
+      <div class="floating-shapes" aria-hidden="true">
+        <div
+          class="shape dot"
+          style="
+            width: 5px;
+            height: 5px;
+            top: 20%;
+            left: 12%;
+            animation-duration: 9s;
+            animation-delay: 0s;
+          "
+        ></div>
+        <div
+          class="shape ring"
+          style="
+            width: 28px;
+            height: 28px;
+            top: 30%;
+            left: 22%;
+            animation-duration: 13s;
+            animation-delay: 1.5s;
+          "
+        ></div>
+        <div
+          class="shape dot"
+          style="
+            width: 8px;
+            height: 8px;
+            top: 60%;
+            left: 8%;
+            animation-duration: 11s;
+            animation-delay: 3s;
+          "
+        ></div>
+        <div
+          class="shape ring"
+          style="
+            width: 16px;
+            height: 16px;
+            top: 70%;
+            left: 18%;
+            animation-duration: 8s;
+            animation-delay: 0.5s;
+          "
+        ></div>
+        <div
+          class="shape dot"
+          style="
+            width: 4px;
+            height: 4px;
+            top: 45%;
+            left: 78%;
+            animation-duration: 14s;
+            animation-delay: 2s;
+          "
+        ></div>
+        <div
+          class="shape ring"
+          style="
+            width: 40px;
+            height: 40px;
+            top: 25%;
+            left: 85%;
+            animation-duration: 16s;
+            animation-delay: 4s;
+          "
+        ></div>
+        <div
+          class="shape dot"
+          style="
+            width: 6px;
+            height: 6px;
+            top: 75%;
+            left: 88%;
+            animation-duration: 10s;
+            animation-delay: 1s;
+          "
+        ></div>
+        <div
+          class="shape ring"
+          style="
+            width: 22px;
+            height: 22px;
+            top: 80%;
+            left: 70%;
+            animation-duration: 12s;
+            animation-delay: 2.5s;
+          "
+        ></div>
+        <div
+          class="shape dot"
+          style="
+            width: 3px;
+            height: 3px;
+            top: 15%;
+            left: 55%;
+            animation-duration: 7s;
+            animation-delay: 0.8s;
+          "
+        ></div>
+        <div
+          class="shape plus"
+          style="
+            top: 55%;
+            left: 92%;
+            animation-duration: 18s;
+            animation-delay: 3.5s;
+          "
+        >
+          ✦
+        </div>
+        <div
+          class="shape plus"
+          style="
+            top: 15%;
+            left: 35%;
+            animation-duration: 15s;
+            animation-delay: 6s;
+          "
+        >
+          ✦
+        </div>
+      </div>
+
+      <div class="sticker-layer" aria-hidden="true">
+        <!-- 左上角錨點（flowers girl） -->
+        <img
+          class="sticker"
+          src="stickers/sticker-1.png"
+          alt=""
+          style="--x: 1%; --y: 3%; --rot: -8deg; --size: 140px"
+        />
+
+        <!-- 左上角小點綴（clover） -->
+        <img
+          class="sticker"
+          src="stickers/sticker-7.png"
+          alt=""
+          style="--x: 9%; --y: 21%; --rot: 18deg; --size: 82px"
+        />
+
+        <!-- 左中（journal） -->
+        <img
+          class="sticker"
+          src="stickers/sticker-5.png"
+          alt=""
+          style="--x: 11%; --y: 42%; --rot: 14deg; --size: 95px"
+        />
+
+        <!-- 左下角錨點（HK kid） -->
+        <img
+          class="sticker"
+          src="stickers/sticker-3.png"
+          alt=""
+          style="--x: 1%; --y: 62%; --rot: 4deg; --size: 118px"
+        />
+
+        <!-- 左下小點綴（右移避免和 S3 重疊） -->
+        <img
+          class="sticker"
+          src="stickers/sticker-9.png"
+          alt=""
+          style="--x: 17%; --y: 80%; --rot: -8deg; --size: 72px"
+        />
+
+        <!-- 右上角錨點（selfie girl） -->
+        <img
+          class="sticker"
+          src="stickers/sticker-2.png"
+          alt=""
+          style="--x: 83%; --y: 2%; --rot: 6deg; --size: 132px"
+        />
+
+        <!-- 右上內側（sticker-10） -->
+        <img
+          class="sticker"
+          src="stickers/sticker-10.png"
+          alt=""
+          style="--x: 73%; --y: 16%; --rot: 5deg; --size: 88px"
+        />
+
+        <!-- 右中上（cat boba） -->
+        <img
+          class="sticker"
+          src="stickers/sticker-8.png"
+          alt=""
+          style="--x: 85%; --y: 34%; --rot: -13deg; --size: 112px"
+        />
+
+        <!-- 右中下（sticker-6） -->
+        <img
+          class="sticker"
+          src="stickers/sticker-6.png"
+          alt=""
+          style="--x: 80%; --y: 55%; --rot: -9deg; --size: 125px"
+        />
+
+        <!-- 右下角錨點（eating girl） -->
+        <img
+          class="sticker"
+          src="stickers/sticker-4.png"
+          alt=""
+          style="--x: 85%; --y: 70%; --rot: -5deg; --size: 118px"
+        />
+      </div>
+
+      <!-- 主文字內容 -->
+      <div class="hero-content">
+        <p class="hero-eyebrow fade-up" style="--delay: 0.2s">
+          ✦ &nbsp;Digital Media Creator &nbsp;✦
+        </p>
+        <h1 class="hero-name fade-up" style="--delay: 0.45s">
+          <span class="name-plain">Phoebe</span>
+          <span class="name-italic">Pang</span>
+        </h1>
+        <p class="hero-sub fade-up" style="--delay: 0.7s">
+          影像製作 &nbsp;•&nbsp; 平面設計 &nbsp;•&nbsp; 程式設計 &nbsp;•&nbsp;
+          UI/UX &nbsp;•&nbsp; 社交媒體 &nbsp;•&nbsp; 拍攝 &nbsp;•&nbsp; 媒體行銷
+        </p>
+      </div>
+
+      <!-- 滾動提示 -->
+      <div class="scroll-hint fade-up" style="--delay: 1.1s">
+        <div class="scroll-line"></div>
+        <span>往下滑</span>
+      </div>
+    </section>
+
+    <!-- ════════════ MARQUEE 字幕帶 ════════════ -->
+    <div class="marquee-strip" aria-hidden="true">
+      <div class="marquee-track">
+        <div class="marquee-inner">
+          <span>Video Production</span><span class="dot-sep">✦</span>
+          <span>Graphic Design</span><span class="dot-sep">✦</span>
+          <span>UI / UX Design</span><span class="dot-sep">✦</span>
+          <span>Photography</span><span class="dot-sep">✦</span>
+          <span>Social Media</span><span class="dot-sep">✦</span>
+          <span>Video Production</span><span class="dot-sep">✦</span>
+          <span>Graphic Design</span><span class="dot-sep">✦</span>
+          <span>UI / UX Design</span><span class="dot-sep">✦</span>
+          <span>Photography</span><span class="dot-sep">✦</span>
+          <span>Social Media</span><span class="dot-sep">✦</span>
+          <!-- 重複一遍確保無縫循環 -->
+          <span>Video Production</span><span class="dot-sep">✦</span>
+          <span>Graphic Design</span><span class="dot-sep">✦</span>
+          <span>UI / UX Design</span><span class="dot-sep">✦</span>
+          <span>Photography</span><span class="dot-sep">✦</span>
+          <span>Social Media</span><span class="dot-sep">✦</span>
+          <span>Video Production</span><span class="dot-sep">✦</span>
+          <span>Graphic Design</span><span class="dot-sep">✦</span>
+          <span>UI / UX Design</span><span class="dot-sep">✦</span>
+          <span>Photography</span><span class="dot-sep">✦</span>
+          <span>Social Media</span><span class="dot-sep">✦</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ════════════ WORK ════════════ -->
+    <section class="work-section" id="work">
+      <div class="work-grid">
+        <a
+          href="video.html"
+          class="project-card parallax-item"
+          data-speed="0.03"
+          data-reveal
+          data-reveal-delay="0"
+        >
+          <div class="project-image">
+            <img src="assets/video.png" alt="Video Editing" />
+            <div class="glass-tag">01</div>
+            <div class="card-overlay"><span>查看 →</span></div>
+          </div>
+          <div class="project-info">
+            <p>內容創作 | 製片 | 視覺敘事</p>
+            <h3>影片剪輯</h3>
+          </div>
+        </a>
+
+        <a
+          href="programming.html"
+          class="project-card parallax-item"
+          data-speed="-0.02"
+          data-reveal
+          data-reveal-delay="0.1"
+        >
+          <div class="project-image">
+            <img src="assets/programming.png" alt="Interface Design" />
+            <div class="glass-tag">02</div>
+            <div class="card-overlay"><span>查看 →</span></div>
+          </div>
+          <div class="project-info">
+            <p>介面設計 | 編碼 | 網站</p>
+            <h3>程式設計 / UI/UX</h3>
+          </div>
+        </a>
+
+        <a
+          href="graphic-design.html"
+          class="project-card parallax-item"
+          data-speed="0.04"
+          data-reveal
+          data-reveal-delay="0.2"
+        >
+          <div class="project-image">
+            <img src="assets/graphic.png" alt="Graphic Design" />
+            <div class="glass-tag">03</div>
+            <div class="card-overlay"><span>查看 →</span></div>
+          </div>
+          <div class="project-info">
+            <p>視覺藝術 | 設計</p>
+            <h3>平面設計</h3>
+          </div>
+        </a>
+
+        <a
+          href="photo.html"
+          class="project-card parallax-item"
+          data-speed="-0.01"
+          data-reveal
+          data-reveal-delay="0.3"
+        >
+          <div class="project-image">
+            <img src="assets/photo.png" alt="Photography" />
+            <div class="glass-tag">04</div>
+            <div class="card-overlay"><span>查看 →</span></div>
+          </div>
+          <div class="project-info">
+            <p>視覺藝術 | 攝影</p>
+            <h3>模特</h3>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <!-- ════════════ ABOUT ════════════ -->
+    <section class="about-section" id="about">
+      <div class="about-container">
+        <div class="about-text">
+          <h2 class="section-tag" data-reveal>[ About Me ]</h2>
+          <p class="main-bio" data-reveal data-reveal-delay="0.1">
+            Welcome to Phoebe Pang's portfolio!
+          </p>
+          <p class="sub-bio" data-reveal data-reveal-delay="0.2">
+            我是在 University of Leeds 讀 BA Digital Media 的 Year 2
+            學生。課程橫跨平面設計、介面設計、程式和媒體傳播，亦在讓我實習、兼職及個人創作學到更多。我自己也做過幕前模特兒，所以對鏡頭角度和構圖有些直覺，跟攝影師溝通也比較順。
+            <br /><br />
+            <strong>影像創作與幕後製作 Video Production</strong><br />
+            拍片是我目前最熱衷的方向。2025年暑假做過社交媒體管理實習，後來轉型為遠程影片創作兼職，慢慢開始搞清楚什麼是視覺節奏、怎麼分析數據、怎麼讓內容對到受眾。
+            <br /><br />
+            <strong>視覺傳達與平面設計 Graphic Design</strong><br />
+            主要用 Adobe Illustrator 和
+            Figma，做過品牌視覺和社群內容。管過網店、在大學學會任職 Publicity
+            Officer，設計不是在課堂上練出來的，是被 deadline 逼出來的。。。
+            <br /><br />
+            <strong>程式與 UI/UX Programming & UI/UX</strong><br />
+            學過 HTML、CSS、JavaScript、Python、PHP
+            不同程式編寫基礎。程式對我來說是另一種設計工具，UI/UX
+            讓我開始習慣從用戶角度想事情。
+            <br /><br />
+            課外的話，我熱愛跳舞，參加過不少比賽和演出。不打算走職業，但舞台經驗讓我對自律和跟人配合這件事有不一樣的理解，這個倒是真的影響了我做創作的方式。<br />
+            現在的目標是找到能同時用到設計、影片和程式的項目，還在累積中。我視數碼媒體為一個持續演進的領域，希望成為多元媒體創作者。這裡展示的只是我部分的作品，歡迎聯繫我了解更多！
+          </p>
+        </div>
+
+        <div class="about-details" data-reveal data-reveal-delay="0.15">
+          <div class="detail-group">
+            <h4>領域</h4>
+            <ul>
+              <li>影像製作</li>
+              <li>UI/UX 設計</li>
+              <li>平面設計</li>
+              <li>程式設計</li>
+            </ul>
+          </div>
+          <div class="detail-group">
+            <h4>教育</h4>
+            <ul>
+              <li>BA 數位媒體 (二年級)</li>
+              <li>University of Leeds</li>
+            </ul>
+          </div>
+          <div class="detail-group">
+            <h4>語言</h4>
+            <ul>
+              <li>廣東語</li>
+              <li>普通话</li>
+              <li>英語</li>
+              <li>韓語 (基礎)</li>
+            </ul>
+          </div>
+          <div class="detail-group">
+            <h4>適用於</h4>
+            <p>（暑期期間將在香港。全年皆可進行遠距工作。）</p>
+            <ul>
+              <li>兼職工作</li>
+              <li>暑期實習</li>
+              <li>自由接案</li>
+            </ul>
+          </div>
+          <div class="detail-group">
+            <h4>位置</h4>
+            <p>香港 &amp; 列斯, 英國</p>
+          </div>
+          <div class="about-star-wrap">
+            <img
+              src="assets/star.png"
+              alt=""
+              class="about-star"
+              aria-hidden="true"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ════════════ FOOTER ════════════ -->
+    <footer class="minimal-footer" id="contact">
+      <div class="footer-container">
+        <div class="footer-column" data-reveal>
+          <h3 class="footer-title">Contact Me</h3>
+          <div class="footer-line"></div>
+          <p>
+            Email:
+            <a href="mailto:hoitungpang@gmail.com">hoitungpang@gmail.com</a>
+          </p>
+          <p>WhatsApp: <a href="tel:+85264139581">+852 6413 9581</a></p>
+        </div>
+        <div class="footer-column" data-reveal data-reveal-delay="0.1">
+          <h3 class="footer-title">Socials</h3>
+          <div class="footer-line"></div>
+          <div class="social-icons">
+            <a href="https://instagram.com/phoebepangs">Instagram</a>
+            <a href="https://www.linkedin.com/in/phoebe-pangs">LinkedIn</a>
+            <a href="https://www.youtube.com/@phoebepaang">YouTube</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-copyright">
+        𐙚₊˚ 2026 © phoebe pang &nbsp;·&nbsp; custom coded ✎ᝰ.
+      </div>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
